@@ -23,6 +23,21 @@ class GameWindow < Gosu::Window
     @thing = false
     @b = 0
     @a = 0
+    @nigel = Gosu::Image.new(self, 'images/nigel.png', false)
+    @nigelB = Gosu::Image.new(self, 'images/nigel_b.png', false)
+    @nigelMov = Gosu::Image.new(self, 'images/nigelmoviendose.png', false)
+    @nigelMovB = Gosu::Image.new(self, 'images/nigelmoviendose_b.png', false)
+    @festejo1 = Gosu::Image.new(self, 'images/festejo1.png', false)
+    @festejo2 = Gosu::Image.new(self, 'images/festejo2.png', false)
+    @fondoArriba = Gosu::Image.new(self, 'images/cabeza_recta_arriba.png', false)
+    @fondoDerecha = Gosu::Image.new(self, 'images/cabeza_torcida_derecha.png', false)
+    @fondoIzquierdaArbol = Gosu::Image.new(self, 'images/cabeza_torcida_izquierda.png', false)
+    @fondoIzquierdaRecto = Gosu::Image.new(self, 'images/cabeza_recta_izquierda.png', false)
+    @fondoIzquierdaArbol2 = Gosu::Image.new(self, 'images/cabeza_torcida_izquierdaa.png', false)
+    @tirandocielo2 =  Gosu::Image.new(self, 'images/tirandocielo2.png', false)
+    @tirandocielo =  Gosu::Image.new(self, 'images/tirandocielo.png', false)
+    @tirandose2 = Gosu::Image.new(self, 'images/tirandose2.png', false)
+    @tirandose = Gosu::Image.new(self, 'images/tirandose.png', false)
     ############################COSAS DE JONSITO
     @cuerpox1 = 550.0
     @cuerpoy1 = 0.0
@@ -85,10 +100,10 @@ class GameWindow < Gosu::Window
         if @now_i > @start_i + @cooldownsalto
           if @lado == "izquierda"
             @x -= 500 if @x > 500
-            @player = Gosu::Image.new(self, 'images/nigelmoviendose.png', false)
+            @player = @nigelMov
           elsif @lado == "derecha"
             @x += 500 if @x < 594
-            @player = Gosu::Image.new(self, 'images/nigelmoviendose_b.png', false)
+            @player = @nigelMovB
           end
 
           @startnig = @now
@@ -100,7 +115,7 @@ class GameWindow < Gosu::Window
 ################################################################################################johnsito
     if button_down?(Gosu::KbR)
       @lose = false
-      @player = Gosu::Image.new(self, 'images/nigel.png', false)
+      @player = @nigel
       @esquivadas = 0
       @tiempoataque = 100
       @tiempocarafin = 50
@@ -347,10 +362,10 @@ class GameWindow < Gosu::Window
       @festejofinal += 1
       @festejofinal = 0 if @festejofinal == 50
       if @festejofinal <25
-        @player = Gosu::Image.new(self, 'images/festejo1.png', false)
+        @player = @festejo1
       end
       if @festejofinal >25
-        @player = Gosu::Image.new(self, 'images/festejo2.png', false)
+        @player = @festejo2
       end
     end
 
@@ -386,14 +401,14 @@ class GameWindow < Gosu::Window
     if @lose == false
       if @lado == "izquierda"
         if @thing == true
-        @player = Gosu::Image.new(self, 'images/nigelmoviendose.png', false) if @buttons_down >0
+        @player = @nigelMov if @buttons_down >0
           if @a == @b-3
             @thing = false
           else
             @a -=1
           end
         else
-          @player = Gosu::Image.new(self, 'images/nigel.png', false)
+          @player = @nigel
           if @b == @a-3
             @thing = true
           else
@@ -403,14 +418,14 @@ class GameWindow < Gosu::Window
         @player.draw(@x, @y, 2) if @buttons_down >0 || @buttons_down == 0
       elsif @lado == "derecha"
         if @thing == true
-          @player = Gosu::Image.new(self, 'images/nigelmoviendose_b.png', false) if @buttons_down >0
+          @player = @nigelMovB if @buttons_down >0
           if @b == @a+3
             @thing = false
           else
             @b +=1
           end
         else
-          @player = Gosu::Image.new(self, 'images/nigel_b.png', false)
+          @player = @nigelB
           if @a == @b+3
             @thing = true
           else
@@ -426,31 +441,31 @@ class GameWindow < Gosu::Window
       ################################################################################################################################################john
       if @carastart == true
         if @johnCaraPos == 0
-          @johnCara = Gosu::Image.new(self, 'images/cabeza_recta_arriba.png', false)
+          @johnCara = @fondoArriba
           @johnCara.draw(0, 0 , 1)
           @xstatic = @x
           @ystatic = @y
         end
         if @johnCaraPos == 1
-          @johnCara = Gosu::Image.new(self, 'images/cabeza_torcida_derecha.png', false)
+          @johnCara = @fondoDerecha
           @johnCara.draw(0, 0 , 1)
           @xstatic = @x
           @ystatic = @y
         end
         if @johnCaraPos == 2
-          @johnCara = Gosu::Image.new(self, 'images/cabeza_torcida_izquierda.png', false)
+          @johnCara = @fondoIzquierdaArbol
           @johnCara.draw(0, 0 , 1)
           @xstatic = @x
           @ystatic = @y
         end
         if @johnCaraPos == 3
-          @johnCara = Gosu::Image.new(self, 'images/cabeza_recta_izquierda.png', false)
+          @johnCara = @fondoIzquierdaRecto
           @johnCara.draw(0, 0 , 1)
           @xstatic = @x
           @ystatic = @y
         end
         if @johnCaraPos == 4
-          @johnCara = Gosu::Image.new(self, 'images/cabeza_torcida_izquierdaa.png', false)
+          @johnCara = @fondoIzquierdaArbol2
           @johnCara.draw(0, 0 , 1)
           @xstatic = @x
           @ystatic = @y
@@ -464,11 +479,11 @@ class GameWindow < Gosu::Window
 
         if @johnCaraPos == 0
           if @x < @cuerpox1
-            @johncuerpo = Gosu::Image.new(self, 'images/tirandocielo2.png', false)
+            @johncuerpo = @tirandocielo2
 
             @grado = -45
           else
-            @johncuerpo = Gosu::Image.new(self, 'images/tirandocielo.png', false)
+            @johncuerpo = @tirandocielo
             @grado = 45
           end
           @johncuerpo.draw_rot(@cuerpox1, @cuerpoy1, 2, @grado)
@@ -476,10 +491,10 @@ class GameWindow < Gosu::Window
 
         if @johnCaraPos == 1
           if @x < @cuerpox2
-            @johncuerpo = Gosu::Image.new(self, 'images/tirandose2.png', false)
+            @johncuerpo = @tirandose2
             @grado = -90
           else
-            @johncuerpo = Gosu::Image.new(self, 'images/tirandose.png', false)
+            @johncuerpo = @tirandose
             @grado = 90
           end
           @johncuerpo.draw_rot(@cuerpox2, @cuerpoy2, 3, @grado)
@@ -487,10 +502,10 @@ class GameWindow < Gosu::Window
 
         if @johnCaraPos == 2
           if @x < @cuerpox3
-            @johncuerpo = Gosu::Image.new(self, 'images/tirandose2.png', false)
+            @johncuerpo = @tirandose2
             @grado = -90
           else
-            @johncuerpo = Gosu::Image.new(self, 'images/tirandose.png', false)
+            @johncuerpo = @tirandose
             @grado = 90
           end
           @johncuerpo.draw_rot(@cuerpox3, @cuerpoy3, 3, @grado)
@@ -498,10 +513,10 @@ class GameWindow < Gosu::Window
 
         if @johnCaraPos == 3
           if @x < @cuerpox4
-            @johncuerpo = Gosu::Image.new(self, 'images/tirandose2.png', false)
+            @johncuerpo = @tirandose2
             @grado = -90
           else
-            @johncuerpo = Gosu::Image.new(self, 'images/tirandose.png', false)
+            @johncuerpo = @tirandose
             @grado = 90
           end
           @johncuerpo.draw_rot(@cuerpox4, @cuerpoy4, 3, @grado)
@@ -509,10 +524,10 @@ class GameWindow < Gosu::Window
 
         if @johnCaraPos == 4
           if @x < @cuerpox5
-            @johncuerpo = Gosu::Image.new(self, 'images/tirandose2.png', false)
+            @johncuerpo = @tirandose2
             @grado = -90
           else
-            @johncuerpo = Gosu::Image.new(self, 'images/tirandose.png', false)
+            @johncuerpo = @tirandose
             @grado = 90
           end
           @johncuerpo.draw_rot(@cuerpox5, @cuerpoy5, 3, @grado)
