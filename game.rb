@@ -19,7 +19,6 @@ class GameWindow < Gosu::Window
     @music.volume = 0.005
     @music.play(true)
     @player = Gosu::Image.new(self, 'images/nigel.png', false)
-    @startnig = Gosu::milliseconds
     @thing = false
     @b = 0
     @a = 0
@@ -38,6 +37,9 @@ class GameWindow < Gosu::Window
     @tirandocielo =  Gosu::Image.new(self, 'images/tirandocielo.png', false)
     @tirandose2 = Gosu::Image.new(self, 'images/tirandose2.png', false)
     @tirandose = Gosu::Image.new(self, 'images/tirandose.png', false)
+
+    @impulso = 20
+
     ############################COSAS DE JONSITO
     @cuerpox1 = 550.0
     @cuerpoy1 = 0.0
@@ -92,24 +94,21 @@ class GameWindow < Gosu::Window
 
   ###############################################################################################space
       if button_down?(Gosu::KbSpace)
+        @space = true
+        @impulso -=1
+        @y -= @impulso
 
-        @now = Gosu::milliseconds
-        @now_i = @now.to_i
-        @start_i = @startnig.to_i
-
-        if @now_i > @start_i + @cooldownsalto
-          if @lado == "izquierda"
-            @x -= 500 if @x > 500
-            @player = @nigelMov
-          elsif @lado == "derecha"
-            @x += 500 if @x < 594
-            @player = @nigelMovB
-          end
-
-          @startnig = @now
-        else
+        if @impulso == -20
+          @impulso = 21
         end
+      else
+        @space = false
       end
+      if @y < 390 && @space == false
+        @y += @impulso
+        @impulso +=1
+      end
+
     end
 ###############################################################################################space.end
 ################################################################################################johnsito
