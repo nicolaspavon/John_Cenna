@@ -39,6 +39,8 @@ class GameWindow < Gosu::Window
     @tirandose = Gosu::Image.new(self, 'images/tirandose.png', false)
 
     @impulso = 20
+    @salto = false
+    @bajando = false
 
     ############################COSAS DE JONSITO
     @cuerpox1 = 550.0
@@ -93,20 +95,24 @@ class GameWindow < Gosu::Window
   ###############################################################################################arrows.end
 
   ###############################################################################################space
-      if button_down?(Gosu::KbSpace)
-        @space = true
+      if button_down?(Gosu::KbUp)
+          @salto = true
+      end
+
+      if button_down?(Gosu::KbDown) && @bajando == false
+        @impulso = 0
+        @bajando = true
+      end
+
+      if @salto == true
         @impulso -=1
         @y -= @impulso
-
-        if @impulso == -20
+        if @y >= 390.0
           @impulso = 21
+          @salto = false
+          @y = 390.0
+          @bajando = false
         end
-      else
-        @space = false
-      end
-      if @y < 390 && @space == false
-        @y += @impulso
-        @impulso +=1
       end
 
     end
