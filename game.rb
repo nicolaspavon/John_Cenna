@@ -1,5 +1,11 @@
 require 'gosu'
-
+#########################################################################################################
+# IMPORTANTE LEER
+# Si, tiene una sola clase. el objetivo de este proyecto personal era lograr el juego y de paso familiarizarme con ruby a mi manera, no hacerlo entendible.
+# El codigo esta muy mal, hasta a mi me cuesta entenderlo. Se como hacerlo bien, lo demuestro en el proyecto final del curso de ruby.
+# Nombre de mi cuenta de Bitbucket en donde esta el proyecto del curso: nicolaspavon
+# (nicolaspavon33@gmail.com)
+##############
 class GameWindow < Gosu::Window
   def initialize
     super(1204, 598)
